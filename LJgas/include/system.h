@@ -28,7 +28,6 @@ struct GridBin{
     void insert(Particle* p);
     std::vector<Particle*> getNeighbors(Particle* p,float radius);
 
-    // GridBin(int r, int c, int b);
 };
 
 struct System{
@@ -37,10 +36,9 @@ struct System{
     GridBin grid;
     double T;
     double m;
-    double kb;
     double r_cut;
 
-    System(int N,  GridBin & grid, double T, double m, double kb, double r_cut);
+    System(int N,  GridBin & grid, double T, double m, double r_cut);
     void update(double dt, std::ofstream *file = nullptr);
     double getEnergy();
     double getTemperature();
@@ -49,12 +47,7 @@ struct System{
 };
 
 void lennardJones(Particle& p1, Particle& p2, float epsilon, float sigma, float cutoff = 5.0f);
-void wcaPotential(Particle& p1, Particle& p2, double epsilon, double sigma);
-void lennardJonesWithLimit(Particle& p1, Particle& p2, double epsilon, double sigma, 
-                          double cutoff, double max_force = 100.0);
-void interact(Particle &p1, Particle &p2);
 void gravity(Particle &p1);
-void velocity_rescaling(std::vector<Particle>& particles, double target_T,const float KB = 1.0f);
+void velocity_rescaling(std::vector<Particle>& particles, double target_T);
 
-// Usage in main loop:
 #endif

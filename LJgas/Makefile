@@ -7,9 +7,8 @@ MAIN_SRC = main.cpp
 MAIN_OBJ = build/main.o
 TESTS = $(wildcard tests/*.cpp)
 TEST_OBJ = $(patsubst tests/%.cpp, build/%.test.o, $(TESTS))
-TARGET = main
+TARGET = LJgas
 TEST_TARGET = test
-PLOT_TARGET = plot
 
 .PHONY: all test clean
 
@@ -35,18 +34,4 @@ build/%.test.o: tests/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -rf build $(TARGET) $(TEST_TARGET) $(PLOT_TARGET) *.gif *.dat *.txt
-
-
-plot: build/runSim.o build/system.o 
-	$(CXX) $(CXXFLAGS) -o $(PLOT_TARGET) $^
-	./$(PLOT_TARGET)
-	python3 plot.py
-
-build/runSim.o: runSim.cpp
-	@mkdir -p build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-build/system.o: src/system.cpp
-	@mkdir -p build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	rm -rf build $(TARGET) $(TEST_TARGET) $(PLOT_TARGET) 
